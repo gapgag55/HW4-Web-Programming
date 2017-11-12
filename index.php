@@ -4,7 +4,7 @@
  * ID: 5988014
  * Sec: 1
  * 
- * This project focus on using Single Page Applications Architecture (SPAs)
+ * This project focus on using MVC architecture.
  * so, routes file is the main of this project.
  * 
  * autoload: this file are included by another file. Such as,
