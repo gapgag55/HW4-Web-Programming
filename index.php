@@ -6,6 +6,8 @@
  * 
  * This project focus on using MVC architecture.
  * so, routes file is the main of this project.
+ * - GET /
+ * - POST /upload
  * 
  * autoload: this file are included by another file. Such as,
  * - MVC architectured file: (Controllers, Views, but No Model)
