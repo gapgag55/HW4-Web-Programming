@@ -1,9 +1,15 @@
 $('#form').on('submit', function (e) {
   e.preventDefault()
 
+  /*
+   * Encode form to send to Backend Server
+   */
   var formData = new FormData($(this)[0])
   var contentHere = $('#contentHere')
 
+  /*
+   * Using Ajax to handle with POST Method
+   */
   $.ajax({
     url: $(this).attr('action'),
     type: "POST",
@@ -11,9 +17,19 @@ $('#form').on('submit', function (e) {
     processData: false,
     contentType: false,
     success: function (response) {
+
+      /*
+       * When Backend send back 
+       * Let converse string to JSON first
+       * (Backend send file as JSON string) 
+       */
       let extractedArr = '';
       response = JSON.parse(response)
       
+      /*
+       * Let's get extracted Data into html
+       * [{'good': 2}, {do: 4}]
+       */
       $.each(response.extractedArr, function (key, val) {
         extractedArr += `
           <tr>
@@ -22,6 +38,14 @@ $('#form').on('submit', function (e) {
           </tr>`
       });
 
+      /*
+       * Standard output HTML with data from Backend
+       * 
+       * - content: content from file
+       * - extracted: removed data based on criteria by using regular expression
+       * - extractedArr: counted word
+       * 
+       */
       let output = `
         <h2>Please find the content of the uploaded file below:</h2>
         ${response.content}
@@ -39,15 +63,27 @@ $('#form').on('submit', function (e) {
         </table>
       </div>
       `
+
+      /*
+       * Let push html to DOM
+       */
       contentHere.html(output)
 
     },
     error: function (response) {
+      /*
+       * When Backend says 409 status code 
+       * where means, user has uploaded incorrect file.
+       */
       contentHere.html('Your file does not .txt') 
     }
   });
 })
 
+/*
+ * Function to display extracted table
+ * when user clicked on button
+ */
 function displayFrequency() {
   let elem = document.getElementById('frequency');
   elem.style.display = 'table';
