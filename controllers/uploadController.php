@@ -1,13 +1,10 @@
 <?php 
 
 class UploadController {
-  public $uploaded;
   public $base_url;
-
   public $content;
 
   public function __construct() {
-    $this->uploaded = false;
     $this->base_url = "uploads/";
     $this->content  = "";
   }
@@ -15,52 +12,61 @@ class UploadController {
   public function index() {
     $this->upload();
 
-    return view('index', array(
-      'content' => $this->content,
-      'upload'  => $this->uploaded
-    ));
+    return view('index');
   }
 
   public function upload() { 
+
+      /*
+       * Check that user has uploaded file
+       */
       if ($_FILES) {
+
         $FILE = $_FILES['file'];
     
         // ERROR HANDLING
         if ( $FILE['type'] != 'text/plain' ) {
 
-          // Get the current response code and set a new one
-          var_dump(http_response_code(409));
+          /*
+           * Get the current response code and set a new one
+           * When user uploads filed extension from .txt
+           */
+          http_response_code(409);
 
         } else {
-          // MOVE FILE   
+          /*
+           * Movie File into Upload Folder
+           */ 
           $this->base_url .= "{$FILE['name']}";  
 
-          $this->uploaded = move_uploaded_file(
-            $FILE['tmp_name'], 
-            $this->base_url
-          );
+          move_uploaded_file($FILE['tmp_name'], $this->base_url);
           
-          // READ FILE
+          /*
+           * Read File by using readUpload Method 
+           */
           $this->readUpload();
         }
       }
   }
 
   public function readUpload() {
+
     $file  = fopen($this->base_url, "r") or die("Unable to open file!");
     while(! feof($file))
     {
       $this->content .= fgets($file). "<br/>";
     }
-
     fclose($file);
+
     $this->extractWords();
   }
 
   public function extractWords() {
-    // Extracted Word 
-    // Note: Extract by regular expression 
-    // Note: Array to String by using implode
+    /* 
+     * Extracted Word 
+     * Note: Extract by regular expression 
+     * Note: Array to String by using implode
+     */
     $extracted = implode(" ",
       array_map(
         'strtolower',
@@ -74,11 +80,14 @@ class UploadController {
       str_word_count($extracted, 1)
     );
 
-    // Send to Client
+    /*
+     * Send Data to Client
+     */
     echo json_encode(array(
       'content' => $this->content,
       'extracted' => $extracted,
       'extractedArr' => $extractedArr
     ));
+    http_response_code(200);
   }
 }
