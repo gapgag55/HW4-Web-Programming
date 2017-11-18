@@ -9,12 +9,6 @@ class UploadController {
     $this->content  = "";
   }
 
-  public function index() {
-    $this->upload();
-
-    return view('index');
-  }
-
   public function upload() { 
 
       /*
@@ -28,8 +22,9 @@ class UploadController {
         if ( $FILE['type'] != 'text/plain' ) {
 
           /*
-           * Get the current response code and set a new one
-           * When user uploads filed extension from .txt
+           * Response back HTTP Status Code 409
+           * Conflict file
+           * When user uploads indirectly filed extension from .txt
            */
           http_response_code(409);
 
@@ -88,6 +83,11 @@ class UploadController {
       'extracted' => $extracted,
       'extractedArr' => $extractedArr
     ));
+
     http_response_code(200);
   }
 }
+
+
+$controller = new uploadController();
+$controller->upload();

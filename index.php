@@ -1,18 +1,24 @@
-<?php 
-/*
- * Name: Sarayut Lawilai
- * ID: 5988014
- * Sec: 1
- * 
- * This project focus on using MVC architecture.
- * so, routes file is the main of this project.
- * - GET /
- * - POST /upload
- * 
- * autoload: this file are included by another file. Such as,
- * - MVC architectured file: (Controllers, Views, but No Model)
- * - Utils: helper function
- * - Config: config root HTTP_HOST
- */
-require 'autoload.php';
-require 'routes.php';
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>HW4 Webprogramming - 5988014</title>
+  </head>
+  <body>
+
+    <h1>Please upload a file</h1>
+    <!-- Form -->
+    <form id="form" action="upload.php" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" />
+      <input type="submit" value="submit" />
+    </form>
+    <!-- End Form -->
+
+    <!-- contentHere -->
+    <div id="contentHere"></div>
+    <!-- End ContentHere -->
+
+    <script src="js/vendor/jquery-3.2.1.min.js"></script>
+    <script src="js/app.js"></script>
+    
+  </body>
+</html>

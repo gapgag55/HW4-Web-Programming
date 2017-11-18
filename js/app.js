@@ -17,6 +17,7 @@ $('#form').on('submit', function (e) {
     processData: false,
     contentType: false,
     success: function (response) {
+      console.log( response )
 
       /*
        * When Backend send back 
@@ -78,6 +79,8 @@ $('#form').on('submit', function (e) {
       contentHere.html('Your file does not .txt') 
     }
   });
+
+  return false;
 })
 
 /*
