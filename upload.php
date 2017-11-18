@@ -88,6 +88,5 @@ class UploadController {
   }
 }
 
-
 $controller = new uploadController();
 $controller->upload();
