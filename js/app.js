@@ -37,11 +37,11 @@ function output( response ) {
   let extractedArr = '';
   response = JSON.parse(response)
 
+  /*
+   * Check error Handling from Server
+   */
   if (response.error) {
-    contentHere.html(
-      `<h2>${response.message}</h2>`
-    )
-    return;
+    return contentHere.html(`<h2>${response.message}</h2>`)
   }
   
    /*
