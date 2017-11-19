@@ -9,7 +9,8 @@ $('#form').on('submit', function (e) {
   /*
    * Using Ajax to handle with POST Method
    */
-  var http = new XMLHttpRequest();
+  let http = window.XMLHttpRequest ? 
+    new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
   
   http.onreadystatechange = function() {
       if(http.readyState == 4 && http.status == 200) {
@@ -71,15 +72,15 @@ function output( response ) {
     ${response.extracted}
     <p><button onclick="displayFrequency()">Display Frequency</button>
     <div id="frequency" style="display: none">
-    <h3 style="margin: 20px 0;">Table of words and frequencies of the uploaded file</h3>
-    <table border="1">
-      <tr>
-        <th>Word</th>
-        <th>Frequency</th>
-      </tr>
-      ${extractedArr}
-    </table>
-  </div>
+      <h3 style="margin: 20px 0;">Table of words and frequencies of the uploaded file</h3>
+      <table border="1">
+        <tr>
+          <th>Word</th>
+          <th>Frequency</th>
+        </tr>
+        ${extractedArr}
+      </table>
+    </div>
   `
 
    /*
