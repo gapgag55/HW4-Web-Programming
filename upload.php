@@ -26,13 +26,16 @@ class UploadController {
            * Conflict file
            * When user uploads indirectly filed extension from .txt
            */
-          http_response_code(409);
+          echo json_encode(array(
+            'message' => 'Your file doesn\'t supperted our system',
+            'error'   => true
+          ));
 
         } else {
           /*
            * Movie File into Upload Folder
            */ 
-          $this->base_url .= "{$FILE['name']}";  
+          $this->base_url .= $FILE['name'];  
 
           move_uploaded_file($FILE['tmp_name'], $this->base_url);
           
@@ -84,7 +87,6 @@ class UploadController {
       'extractedArr' => $extractedArr
     ));
 
-    http_response_code(200);
   }
 }
 

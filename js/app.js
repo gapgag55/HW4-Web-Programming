@@ -27,6 +27,7 @@ $('#form').on('submit', function (e) {
  * Response Function
  */
 function output( response ) {
+  var contentHere = $('#contentHere')
 
    /*
     * When Backend send back 
@@ -35,6 +36,13 @@ function output( response ) {
     */
   let extractedArr = '';
   response = JSON.parse(response)
+
+  if (response.error) {
+    contentHere.html(
+      `<h2>${response.message}</h2>`
+    )
+    return;
+  }
   
    /*
     * Let's get extracted Data into html
@@ -77,7 +85,6 @@ function output( response ) {
    /*
     * Let push html to DOM
     */
-  var contentHere = $('#contentHere')
   contentHere.html(output)
 }
 
