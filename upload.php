@@ -69,7 +69,7 @@ class UploadController {
       array_map(
         'strtolower',
         preg_split(
-        "((?:a|an|the|that|those|these|is|am|are|isn't|aren't|not|has|have|had|hasn't|haven't|hadn't|will|won't|shall|after|in|on|with|to|into)\s+|([0-9]|\'s|s\'|\'re|\'ll|\\r|\\n|\#|\%|\&|\*|!|\?|\.|\,|\s+|<br/>))"
+        "((?:a|an|the|this|that|those|these|is|am|are|isn't|aren't|not|has|have|had|hasn't|haven't|hadn't|will|won't|shall|after|in|on|with|to|into)\s+|([0-9]|\'s|s\'|\'re|\'ll|\\r|\\n|\#|\%|\&|\*|!|\?|\.|\,|\s+|<br/>))"
         , $this->content)
       )
     );
